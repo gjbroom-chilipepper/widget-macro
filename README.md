@@ -1,4 +1,4 @@
-# com-chilipeppr-widget-macro
+# ca-selfstyled-widget-macro
 Edit and run Javascript macros inside ChiliPeppr. Lots of sample macros too.
 
 ![alt text](screenshot.png "Screenshot")
@@ -11,13 +11,13 @@ not conflict with other ChiliPeppr widgets.
 
 | Item                  | Value           |
 | -------------         | ------------- | 
-| ID                    | com-chilipeppr-widget-macro |
+| ID                    | ca-selfstyled-widget-macro |
 | Name                  | Widget / Macro |
 | Description           | Edit and run Javascript macros inside ChiliPeppr. Lots of sample macros too. |
-| chilipeppr.load() URL | http://raw.githubusercontent.com/chilipeppr/com-chilipeppr-widget-macro/master/auto-generated-widget.html |
-| Edit URL              | http://ide.c9.io/chilipeppr/com-chilipeppr-widget-macro |
-| Github URL            | http://github.com/chilipeppr/com-chilipeppr-widget-macro |
-| Test URL              | https://preview.c9users.io/chilipeppr/com-chilipeppr-widget-macro/widget.html |
+| chilipeppr.load() URL | http://raw.githubusercontent.com/gjbroom-chilipepper/widget-macro/master/auto-generated-widget.html |
+| Edit URL              | http://ide.c9.io/gjbroom/widget-macro |
+| Github URL            | http://github.com/gjbroom-chilipepper/widget-macro |
+| Test URL              | https://preview.c9users.io/gjbroom/widget-macro/widget.html |
 
 ## Example Code for chilipeppr.load() Statement
 
@@ -30,11 +30,11 @@ back the instance of it.
 ```javascript
 chilipeppr.load(
   "#myDivWidgetInsertedInto",
-  "http://raw.githubusercontent.com/chilipeppr/com-chilipeppr-widget-macro/master/auto-generated-widget.html",
+  "http://raw.githubusercontent.com/gjbroom-chilipepper/widget-macro/master/auto-generated-widget.html",
   function() {
     // Callback after widget loaded into #myDivWidgetInsertedInto
     cprequire(
-      "inline:com-chilipeppr-widget-macro", // the id you gave your widget
+      "inline:ca-selfstyled-widget-macro", // the id you gave your widget
       function(mywidget) {
         // Callback that is passed reference to your newly loaded widget
         console.log("My widget just got loaded.", mywidget);
@@ -89,13 +89,13 @@ The table below shows, in order, the methods and properties inside the widget/el
 
 | Item                  | Type          | Description |
 | -------------         | ------------- | ----------- |
-| id | string | "com-chilipeppr-widget-macro"<br><br>The ID of the widget. You must define this and make it unique. |
+| id | string | "ca-selfstyled-widget-macro"<br><br>The ID of the widget. You must define this and make it unique. |
 | name | string | "Widget / Macro" |
 | desc | string | "Edit and run Javascript macros inside ChiliPeppr. Lots of sample macros too." |
-| url | string | "http://raw.githubusercontent.com/chilipeppr/com-chilipeppr-widget-macro/master/auto-generated-widget.html" |
-| fiddleurl | string | "http://ide.c9.io/chilipeppr/com-chilipeppr-widget-macro" |
-| githuburl | string | "http://github.com/chilipeppr/com-chilipeppr-widget-macro" |
-| testurl | string | "http://com-chilipeppr-widget-macro-chilipeppr.c9users.io/widget.html" |
+| url | string | "http://raw.githubusercontent.com/gjbroom-chilipepper/widget-macro/master/auto-generated-widget.html" |
+| fiddleurl | string | "http://ide.c9.io/gjbroom/widget-macro" |
+| githuburl | string | "http://github.com/gjbroom-chilipepper/widget-macro" |
+| testurl | string | "http://widget-macro-gjbroom.c9users.io/widget.html" |
 | publish | object | Please see docs above.<br><br>Define the publish signals that this widget/element owns or defines so thatother widgets know how to subscribe to them and what they do. |
 | subscribe | object | Please see docs above.<br><br>Define the subscribe signals that this widget/element owns or defines so thatother widgets know how to subscribe to them and what they do. |
 | foreignPublish | object | Please see docs above.<br><br>Document the foreign publish signals, i.e. signals owned by other widgetsor elements, that this widget/element publishes to. |

@@ -2,7 +2,7 @@
 // ignore this errormessage:
 
 // ChiliPeppr Widget/Element Javascript
-cprequire_test(["inline:com-chilipeppr-widget-macro"], function(myWidget) {
+cprequire_test(["inline:ca-selfstyled-widget-macro"], function(myWidget) {
 
     // Test this element. This code is auto-removed by the chilipeppr.load()
     // when using this widget in production. So use the cpquire_test to do things
@@ -12,7 +12,7 @@ cprequire_test(["inline:com-chilipeppr-widget-macro"], function(myWidget) {
     console.log("test running of " + myWidget.id);
 
     $('body').prepend('<div id="testDivForFlashMessageWidget"></div>');
-    $('#com-chilipeppr-widget-macro').css('margin', '10px');
+    $('#ca-selfsyled-widget-macro').css('margin', '10px');
 
     chilipeppr.load(
         "#testDivForFlashMessageWidget",
@@ -32,12 +32,12 @@ cprequire_test(["inline:com-chilipeppr-widget-macro"], function(myWidget) {
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dependencies here */ ], function() {
+cpdefine("inline:ca-selfstyled-widget-macro", ["chilipeppr_ready", /* other dependencies here */ ], function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
          */
-        id: "com-chilipeppr-widget-macro", // Make the id the same as the cpdefine id
+        id: "ca-selfstyled-widget-macro", // Make the id the same as the cpdefine id
         name: "Widget / Macro", // The descriptive name of your widget.
         desc: "Edit and run Javascript macros inside ChiliPeppr. Lots of sample macros too.", // A description of what your widget does
         url: "(auto fill by runme.js)",       // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
@@ -81,20 +81,20 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         foreignSubscribe: {
             // Define a key:value pair here as strings to document what signals you subscribe to
             // that are owned by foreign/other widgets.
-            // '/com-chilipeppr-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
+            // '/ca-selfsyled-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
         },
         jscript: null, // contains the javascript macro that the user is working with
         init: function () {
 
             this.forkSetup();
             
-            $('.com-chilipeppr-widget-macro-run').click(this.runMacro.bind(this));
+            $('.ca-selfsyled-widget-macro-run').click(this.runMacro.bind(this));
             
             // saveMacro
-            $('.com-chilipeppr-widget-macro-save').click(this.saveMacro.bind(this));
+            $('.ca-selfsyled-widget-macro-save').click(this.saveMacro.bind(this));
             
             // setup del files
-            $('#com-chilipeppr-widget-macro .recent-file-delete').click( this.deleteRecentFiles.bind(this));
+            $('#ca-selfsyled-widget-macro .recent-file-delete').click( this.deleteRecentFiles.bind(this));
 
             this.buildRecentFileMenu();
             
@@ -103,7 +103,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             console.log("made macro obj (this) available in global namepace so you can call macro.status(), etc:", macro);
             
             // capture ctrl+enter on textarea
-            $('.com-chilipeppr-widget-macro-jscript').keypress(this.jscriptKeypress.bind(this));
+            $('.ca-selfsyled-widget-macro-jscript').keypress(this.jscriptKeypress.bind(this));
             
             // samples
             this.setupSamples();
@@ -111,7 +111,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             this.makeTextareaAcceptTabs();
             
             // popovers
-            $('#com-chilipeppr-widget-macro .panel-heading .btn').popover();
+            $('#ca-selfsyled-widget-macro .panel-heading .btn').popover();
             
             // see if startup script
             this.setupStartup();
@@ -121,8 +121,8 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         setupStartup: function() {
             
             // setup pulldown menu items
-            $('.com-chilipeppr-widget-macro-startup-load').click(this.editStartup.bind(this));
-            $('.com-chilipeppr-widget-macro-startup-save').click(this.saveStartup.bind(this));
+            $('.ca-selfsyled-widget-macro-startup-load').click(this.editStartup.bind(this));
+            $('.ca-selfsyled-widget-macro-startup-save').click(this.saveStartup.bind(this));
             
             // run startup script
             this.onStartup();
@@ -143,7 +143,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     that.status("Bypassed startup script since ?nostartup=true in URL");
 
                 } else {
-                    var ss = localStorage.getItem('com-chilipeppr-widget-macro-startup');
+                    var ss = localStorage.getItem('ca-selfsyled-widget-macro-startup');
                     if (ss && ss.length > 0) {
                         // there is a startup script
                         console.log("There is a startup script. Run it.", ss);
@@ -162,7 +162,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         editStartup: function(evt) {
             console.log("editStartup. evt:", evt);
             
-            var script = localStorage.getItem('com-chilipeppr-widget-macro-startup');
+            var script = localStorage.getItem('ca-selfsyled-widget-macro-startup');
             this.jscript = script;
             this.loadJscript(this.jscript);
             this.status("Loaded startup script");
@@ -171,11 +171,11 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         saveStartup: function(evt) {
             console.log("saveStartup. evt:", evt);
             var fileStr = this.getJscript();
-            localStorage.setItem('com-chilipeppr-widget-macro-startup', fileStr);
+            localStorage.setItem('ca-selfsyled-widget-macro-startup', fileStr);
             this.status("Saved startup script");
         },
         makeTextareaAcceptTabs: function() {
-            $(document).delegate('.com-chilipeppr-widget-macro-jscript', 'keydown', function(e) {
+            $(document).delegate('.ca-selfsyled-widget-macro-jscript', 'keydown', function(e) {
                 var keyCode = e.keyCode || e.which;
                 
                 if (keyCode == 9) {
@@ -195,7 +195,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             });
         },
         getJscript: function() {
-            this.jscript = $('.com-chilipeppr-widget-macro-jscript').val();
+            this.jscript = $('.ca-selfsyled-widget-macro-jscript').val();
             return this.jscript;
         },
         runMacro: function(macroStr, helpTxt) {
@@ -207,7 +207,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 this.getJscript();
             }
             
-            //this.jscript = $('.com-chilipeppr-widget-macro-jscript').val();
+            //this.jscript = $('.ca-selfsyled-widget-macro-jscript').val();
             
             if (this.jscript && this.jscript.length > 1) {
             try {
@@ -239,20 +239,20 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             //console.log("got keypress textarea. evt:", evt);
             if (evt.ctrlKey && evt.keyCode == 10) {
                 // run the macro
-                //$('.com-chilipeppr-widget-macro-run').click();
+                //$('.ca-selfsyled-widget-macro-run').click();
                 this.runMacro();
                 // mimic push on btn
-                $('.com-chilipeppr-widget-macro-run').addClass('active');
+                $('.ca-selfsyled-widget-macro-run').addClass('active');
                 setTimeout(function() {
-                    $('.com-chilipeppr-widget-macro-run').removeClass('active');
+                    $('.ca-selfsyled-widget-macro-run').removeClass('active');
                 }, 200);
             }
                 
         },
         showData: function(datatxt) {
-            $('#com-chilipeppr-widget-modal-macro-view .modal-body textarea').val(datatxt);
-            //$('#com-chilipeppr-widget-modal-macro-view .modal-title').text("View Probe Data");
-            $('#com-chilipeppr-widget-modal-macro-view').modal('show');
+            $('#ca-selfsyled-widget-modal-macro-view .modal-body textarea').val(datatxt);
+            //$('#ca-selfsyled-widget-modal-macro-view .modal-title').text("View Probe Data");
+            $('#ca-selfsyled-widget-modal-macro-view').modal('show');
         },
         saveMacro: function() {
             
@@ -282,7 +282,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             for (var i = 0; i < localStorage.length; i++){
                 console.log("localStorage.item.key:", localStorage.key(i));
                 var key = localStorage.key(i);
-                if (key.match(/com-chilipeppr-widget-macro-recent/)) {
+                if (key.match(/ca-selfsyled-widget-macro-recent/)) {
                     //localStorage.removeItem(key);
                     keysToDelete.push(key);
                     console.log("going to remove localstorage key:", key);
@@ -299,7 +299,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             // get the next avail slot
             var lastSlot = -1;
             for(var ctr = 0; ctr < 100; ctr++) {
-                if ('com-chilipeppr-widget-macro-recent' + ctr in localStorage) {
+                if ('ca-selfsyled-widget-macro-recent' + ctr in localStorage) {
                     console.log("found recent file entry. ctr:", ctr);
                     lastSlot = ctr;
                 }
@@ -307,12 +307,12 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             console.log("lastSlot we found:", lastSlot);
             
             var nextSlot = lastSlot + 1;
-            var recent = localStorage.getItem("com-chilipeppr-widget-macro-recent" + nextSlot);
+            var recent = localStorage.getItem("ca-selfsyled-widget-macro-recent" + nextSlot);
             if (recent == null) {
                 console.log("empty slot. filling.");
-                localStorage.setItem("com-chilipeppr-widget-macro-recent" + nextSlot, fileStr);
-                localStorage.setItem("com-chilipeppr-widget-macro-recent" + nextSlot + "-name", info.name);
-                localStorage.setItem("com-chilipeppr-widget-macro-recent" + nextSlot + "-lastMod", info.lastModified);
+                localStorage.setItem("ca-selfsyled-widget-macro-recent" + nextSlot, fileStr);
+                localStorage.setItem("ca-selfsyled-widget-macro-recent" + nextSlot + "-name", info.name);
+                localStorage.setItem("ca-selfsyled-widget-macro-recent" + nextSlot + "-lastMod", info.lastModified);
                 this.buildRecentFileMenu();
             }
             
@@ -320,9 +320,9 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         buildRecentFileMenu: function() {
             
             // cleanup prev recent files
-            $('#com-chilipeppr-widget-macro .dropdown-menu-main > li.recent-file-item').remove();
+            $('#ca-selfsyled-widget-macro .dropdown-menu-main > li.recent-file-item').remove();
             
-            var li = $('#com-chilipeppr-widget-macro .dropdown-menu-main > li.recent-files');
+            var li = $('#ca-selfsyled-widget-macro .dropdown-menu-main > li.recent-files');
             console.log("listItems:", li);
             
             // get all macro files
@@ -330,7 +330,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             for (var i = 0; i < localStorage.length; i++){
                 console.log("localStorage.item.key:", localStorage.key(i));
                 var key = localStorage.key(i);
-                if (key.match(/com-chilipeppr-widget-macro-recent(\d+)-name/)) {
+                if (key.match(/ca-selfsyled-widget-macro-recent(\d+)-name/)) {
                     //localStorage.removeItem(key);
                     var keyCtr = RegExp.$1;
                     keysForMacros.push(keyCtr);
@@ -344,12 +344,12 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             //var ctr = 0;
             for(var i = 0; i < keysForMacros.length; i++) {
                 var ctr = keysForMacros[i];
-                var recentName = localStorage.getItem("com-chilipeppr-widget-macro-recent" + ctr + "-name");
+                var recentName = localStorage.getItem("ca-selfsyled-widget-macro-recent" + ctr + "-name");
                 //while(recentName != null) {
                 console.log("recentFile ctr:", ctr, "recentName:", recentName);
-                var recentLastModified = localStorage.getItem("com-chilipeppr-widget-macro-recent" + ctr + "-lastMod");
+                var recentLastModified = localStorage.getItem("ca-selfsyled-widget-macro-recent" + ctr + "-lastMod");
                 var rlm = new Date(recentLastModified);
-                var recentSize = localStorage.getItem("com-chilipeppr-widget-macro-recent" + ctr).length;
+                var recentSize = localStorage.getItem("ca-selfsyled-widget-macro-recent" + ctr).length;
                 var rsize = parseInt(recentSize / 1024);
                 if (rsize == 0) rsize = 1;
                 var newLi = $(
@@ -360,7 +360,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     //' <button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></button></a></li>');
                 newLi.insertAfter(li);
                 var that = this;
-                newLi.click("com-chilipeppr-widget-macro-recent" + ctr, function(data) {
+                newLi.click("ca-selfsyled-widget-macro-recent" + ctr, function(data) {
                     console.log("got recent file click. data:", data);
                     var key = data.data;
                     that.loadFileFromLocalStorageKey(key);
@@ -368,7 +368,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 });
 
                 //ctr++;
-                //recentName = localStorage.getItem("com-chilipeppr-widget-macro-recent" + ctr + "-name");
+                //recentName = localStorage.getItem("ca-selfsyled-widget-macro-recent" + ctr + "-name");
                 
             }
         },
@@ -387,21 +387,21 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         },
         loadJscript: function(txt) {
             //this.jscript = txt;
-            $('.com-chilipeppr-widget-macro-jscript').val(txt);
+            $('.ca-selfsyled-widget-macro-jscript').val(txt);
             console.log("loaded jscript");
         },
         setupSamples: function() {
             var that = this;
-            $('.com-chilipeppr-widget-macro-sample.sample-alert').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-alert').click(function() { 
                 that.loadJscript('alert("Ahhh. Something went wrong!");');
             });
-            $('.com-chilipeppr-widget-macro-sample.sample-status').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-status').click(function() { 
                 that.loadJscript('macro.status("I just put a status item entry in.");');
             });
-            $('.com-chilipeppr-widget-macro-sample.sample-send').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-send').click(function() { 
                 that.loadJscript('macro.sendSerial("?\\n");');
             });
-            $('.com-chilipeppr-widget-macro-sample.sample-sendpub').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-sendpub').click(function() { 
                 that.loadJscript(
                     '// Uses the official pubsub method\n' +
                     '// to send to serial port when serial\n' + 
@@ -410,108 +410,108 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 );
             });
 
-            $('.com-chilipeppr-widget-macro-sample.sample-sendgcode').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-sendgcode').click(function() { 
                 that.loadJscript('macro.sendSerial("G0 X0 Y0\\n");');
             });
             
-            $('.com-chilipeppr-widget-macro-sample.sample-sendaltport').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-sendaltport').click(function() { 
                 var txt = that.getMethodString(that.sendToArduino);
                 that.loadJscript(txt);
             });
             
-            $('.com-chilipeppr-widget-macro-sample.sample-watch').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-watch').click(function() { 
                 //var txt = that.watch.toString();
                 var txt = that.getMethodString(that.watch);
                 //console.log("watch jscript:", txt, "that.watch:", that.watch);
                 that.loadJscript(txt);
             });
 
-            $('.com-chilipeppr-widget-macro-sample.sample-loadgcode').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-loadgcode').click(function() { 
                 //var txt = that.watch.toString();
                 var txt = that.getMethodString(that.sendGcodeToWorkspace);
                 //console.log("watch jscript:", txt, "that.watch:", that.watch);
                 that.loadJscript(txt);
             });
             
-            $('.com-chilipeppr-widget-macro-sample.sample-fadeout').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-fadeout').click(function() { 
                 var txt = that.getMethodString(that.fadeout);
                 that.loadJscript(txt);
             });
             
             //bbox
-            $('.com-chilipeppr-widget-macro-sample.sample-bbox').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-bbox').click(function() { 
                 var txt = that.getMethodString(that.addbbox);
                 that.loadJscript(txt);
             });
             
             // list of gcode cmds
-             $('.com-chilipeppr-widget-macro-sample.sample-loopcmds').click(function() { 
+             $('.ca-selfsyled-widget-macro-sample.sample-loopcmds').click(function() { 
                 var txt = that.getMethodString(that.cmdsSentViaTimeout);
                 that.loadJscript(txt);
             });
             
             // downloadgcode
-            $('.com-chilipeppr-widget-macro-sample.sample-downloadgcode').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-downloadgcode').click(function() { 
                 var txt = that.getMethodString(that.downloadGcode);
                 that.loadJscript(txt);
             });
             
             // injectCams
-            $('.com-chilipeppr-widget-macro-sample.sample-injectCams').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-injectCams').click(function() { 
                 var txt = that.getMethodString(that.injectCams);
                 that.loadJscript(txt);
             });
             
             // iterateGcode
-            $('.com-chilipeppr-widget-macro-sample.sample-iterateGcode').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-iterateGcode').click(function() { 
                 var txt = that.getMethodString(that.iterateGcode);
                 that.loadJscript(txt);
             });
             
             // watchOnComplete
-            $('.com-chilipeppr-widget-macro-sample.sample-watchOnComplete').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-watchOnComplete').click(function() { 
                 var txt = that.getMethodString(that.watchOnCompleteControlArduino);
                 that.loadJscript(txt);
             });
             
             // rewriteGcode
-            $('.com-chilipeppr-widget-macro-sample.sample-rewritegcode').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-rewritegcode').click(function() { 
                 var txt = that.getMethodString(that.rewriteGcode);
                 that.loadJscript(txt);
             });
             
             // injectBtn
-            $('.com-chilipeppr-widget-macro-sample.sample-injectbtn').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-injectbtn').click(function() { 
                 var txt = that.getMethodString(that.injectBtn);
                 that.loadJscript(txt);
             });
             
             // get3dobj
-            $('.com-chilipeppr-widget-macro-sample.sample-get3dobj').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-get3dobj').click(function() { 
                 var txt = that.getMethodString(that.get3dobj);
                 that.loadJscript(txt);
             });
             
             // get3dobjG1FromG2G3
-            $('.com-chilipeppr-widget-macro-sample.sample-get3dobjG1FromG2G3').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-get3dobjG1FromG2G3').click(function() { 
                 var txt = that.getMethodString(that.get3dobjG1FromG2G3);
                 that.loadJscript(txt);
             });
             
             // flashMsg
-            $('.com-chilipeppr-widget-macro-sample.sample-flashMsg').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-flashMsg').click(function() { 
                 var txt = that.getMethodString(that.flashMsg);
                 that.loadJscript(txt);
             });
             
             // watchChiliPepprPause
-            $('.com-chilipeppr-widget-macro-sample.sample-watchChiliPepprPause').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-watchChiliPepprPause').click(function() { 
                 var txt = that.getMethodString(that.watchChiliPepprPause);
                 that.loadJscript(txt);
             });
             
             // watchChiliPepprPauseSolderDispenser
-            $('.com-chilipeppr-widget-macro-sample.sample-watchChiliPepprPauseSolderDispenser').click(function() { 
+            $('.ca-selfsyled-widget-macro-sample.sample-watchChiliPepprPauseSolderDispenser').click(function() { 
                 var txt = that.getMethodString(that.watchChiliPepprPauseSolderDispenser);
                 that.loadJscript(txt);
             });
@@ -524,7 +524,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 var id = item.id;
                 var desc = item.desc;
 
-                var menuToAdd = $('<li><a href="javascript:" class="com-chilipeppr-widget-macro-sample ' +
+                var menuToAdd = $('<li><a href="javascript:" class="ca-selfsyled-widget-macro-sample ' +
                     'sample-' + id + '">' + desc + '</a></li>');
                 menuToAdd.click(function() {
                     var txt = that.getMethodString(that[id]);
@@ -924,9 +924,9 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
          */
         get3dobj: function() {
             var get3dObj= function() {
-                chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", recv3dObj);
-                chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
-                chilipeppr.unsubscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", recv3dObj);
+                chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", recv3dObj);
+                chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
+                chilipeppr.unsubscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", recv3dObj);
             };
             
             var recv3dObj = function(obj) {
@@ -945,9 +945,9 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
          */
         get3dobjG1FromG2G3: function() {
             var get3dObj= function() {
-                chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", recv3dObj);
-                chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
-                chilipeppr.unsubscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", recv3dObj);
+                chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", recv3dObj);
+                chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
+                chilipeppr.unsubscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", recv3dObj);
             };
             
             var recv3dObj = function(obj) {
@@ -997,10 +997,10 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     btn2.click(this.onBtn2Click.bind(this));
                     btnGrp.append(btn1);
                     btnGrp.append(btn2);
-                    $('#com-chilipeppr-widget-macro .panel-heading').append(btnGrp);
+                    $('#ca-selfsyled-widget-macro .panel-heading').append(btnGrp);
                 },
                 removeBtns: function() {
-                    $('#com-chilipeppr-widget-macro .panel-heading .mymacrobtns').remove();
+                    $('#ca-selfsyled-widget-macro .panel-heading .mymacrobtns').remove();
                 },
                 onBtn1Click: function(evt) {
                     macro.status("Button 1 clicked.");
@@ -1044,7 +1044,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     // The 5 at the end of the subscribe() is the priority.
                     // The default priority of a subscribe() is 10. Lower is
                     // higher priority.
-                    chilipeppr.subscribe('/com-chilipeppr-widget-serialport/jsonSend', this, this.onJsonSend, 5);
+                    chilipeppr.subscribe('/ca-selfsyled-widget-serialport/jsonSend', this, this.onJsonSend, 5);
                     // store macro in window object so we have it next time thru
                     window["myMacro"] = this;
                     
@@ -1054,7 +1054,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 },
                 uninit: function() {
                     macro.status("Uninitting macro.");
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-serialport/jsonSend", this.onJsonSend);
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-serialport/jsonSend", this.onJsonSend);
                 },
                 onJsonSend: function(data) {
                     console.group('pulley rewrite'); 
@@ -1133,25 +1133,25 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     //republish the gcode command that was intercepted
                     var obj = {D: gcode, Id: data.Id};
                     // unsubscribe so that we don't get our own rewritten gcode coming back to us
-                    chilipeppr.unsubscribe('/com-chilipeppr-widget-serialport/jsonSend', this.onJsonSend); 
+                    chilipeppr.unsubscribe('/ca-selfsyled-widget-serialport/jsonSend', this.onJsonSend); 
                     // send the gcode off as if nothing really changed, even tho we completely rewrote it
-                    chilipeppr.publish('/com-chilipeppr-widget-serialport/jsonSend', obj);
+                    chilipeppr.publish('/ca-selfsyled-widget-serialport/jsonSend', obj);
                     // resubscribe immediately so we can rewrite the next line of gcode
-                    chilipeppr.subscribe('/com-chilipeppr-widget-serialport/jsonSend', this, this.onJsonSend, 5);
+                    chilipeppr.subscribe('/ca-selfsyled-widget-serialport/jsonSend', this, this.onJsonSend, 5);
                     
                     console.groupEnd();
                     return false;
                 },
                 obj3d: null,
                 getXyzCoords: function() {
-                    chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", this, this.getXyzCoordsRecv3dObj);
-                    chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
+                    chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", this, this.getXyzCoordsRecv3dObj);
+                    chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
                 },
                 getXyzCoordsRecv3dObj: function(obj3d) {
                     console.log("Got our 3d obj. Line count:", obj3d.userData.lines.length);
                     this.obj3d = obj3d;
                     // unsub so we don't get anymore callbacks on this
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", this.getXyzCoordsRecv3dObj);
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", this.getXyzCoordsRecv3dObj);
                 },
                 getXyzCoordsForLine: function(line) {
                     console.log("getXyzCoordsForLine. line:", line);
@@ -1196,19 +1196,19 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     }
                     macro.status("Starting watch onComplete macro");
                     // subscribe to onComplete
-                    chilipeppr.subscribe("/com-chilipeppr-widget-serialport/onComplete", this, this.onComplete);
+                    chilipeppr.subscribe("/ca-selfsyled-widget-serialport/onComplete", this, this.onComplete);
                     // store macro in window object so we have it next time thru
                     window["myMacro"] = this;
                     this.getGcode();
                 },
                 uninit: function() {
                     macro.status("Uninitting macro.");
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-serialport/onComplete", this.onComplete);
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-serialport/onComplete", this.onComplete);
                 },
                 getGcode: function() {
-                    chilipeppr.subscribe("/com-chilipeppr-widget-gcode/recvGcode", this, this.getGcodeCallback);
-                    chilipeppr.publish("/com-chilipeppr-widget-gcode/requestGcode", "");
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-gcode/recvGcode", this.getGcodeCallback);
+                    chilipeppr.subscribe("/ca-selfsyled-widget-gcode/recvGcode", this, this.getGcodeCallback);
+                    chilipeppr.publish("/ca-selfsyled-widget-gcode/requestGcode", "");
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-gcode/recvGcode", this.getGcodeCallback);
                 },
                 getGcodeCallback: function(data) {
                     this.gcode = data;
@@ -1231,14 +1231,14 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                         if (gcodeline.match(/\bM3\b/i)) {
                             // turn laser off
                             macro.status("Laser Off from line " + data.Id);
-                            chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "send " + this.arduinoSerialPort + " laser-off\n");
+                            chilipeppr.publish("/ca-selfsyled-widget-serialport/ws/send", "send " + this.arduinoSerialPort + " laser-off\n");
                         } else if (gcodeline.match(/\bM5\b/i)) {
                             // turn laser on
                             macro.status("Laser On from line " + data.Id);
-                            chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "send " + this.arduinoSerialPort + " laser-on\n");
+                            chilipeppr.publish("/ca-selfsyled-widget-serialport/ws/send", "send " + this.arduinoSerialPort + " laser-on\n");
                         } else if (gcodeline.match(/\bM30\b/i)) {
                             macro.status("Done running our gcode. Laser off.");
-                            chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "send " + this.arduinoSerialPort + " laser-off\n");
+                            chilipeppr.publish("/ca-selfsyled-widget-serialport/ws/send", "send " + this.arduinoSerialPort + " laser-off\n");
                             this.uninit();
                         }
                         
@@ -1260,9 +1260,9 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 },
                 get3dObjectFrom3dViewer: function() {
                     // query the 3d viewer for it's core object
-                    chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", this, this.recv3dObject);
-                    chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", this, this.recv3dObject);
+                    chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", this, this.recv3dObject);
+                    chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", this, this.recv3dObject);
                 },
                 loopThruGcode: function() {
                     var ctr = 0;
@@ -1288,8 +1288,8 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             // them in a new right column
             var cams = {
                 init: function() {
-                    $('#com-chilipeppr-ws-gcode-hdr').parent().addClass('nopadding');
-                    $('#com-chilipeppr-webrtcclient').remove();
+                    $('#ca-selfsyled-ws-gcode-hdr').parent().addClass('nopadding');
+                    $('#ca-selfsyled-webrtcclient').remove();
                     $('.pnlWorkspaceRtSidebarCollapsed').removeClass('col-xs-12').addClass('col-xs-10');
                     $('#pnlRtSidebar').addClass('col-xs-2 nopadding').css('padding-right', '10px');
                     // $('#pnlRtSidebar').html("");
@@ -1299,7 +1299,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 },
                 initCams: function() {
                     macro.status("initting cams");
-                    cprequire(["inline:com-chilipeppr-widget-webrtc-clientmulti"], function (camlist) {
+                    cprequire(["inline:ca-selfsyled-widget-webrtc-clientmulti"], function (camlist) {
                         console.log("running of " + camlist.id);
                         camlist.init();
                     });
@@ -1316,7 +1316,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             // override methods in a module, call 
             // methods directly, or access properties 
             // of that module.
-            cprequire(['inline:com-chilipeppr-widget-gcode'], function(gcode) {
+            cprequire(['inline:ca-selfsyled-widget-gcode'], function(gcode) {
                 var txt = gcode.fileLines.join('\n');
                 window.open('data:text/csv;charset=utf-8,' + escape(txt));
             });
@@ -1337,14 +1337,14 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     macro.status("Initted my macro");
                     // Subscribe to receive data events for all com ports
                     // We will filter for our serial port data
-                    chilipeppr.subscribe("/com-chilipeppr-widget-serialport/ws/recv", this, this.onRecvData);
+                    chilipeppr.subscribe("/ca-selfsyled-widget-serialport/ws/recv", this, this.onRecvData);
                     // Subscribe to incoming position data from CNC controller
-                    chilipeppr.subscribe("/com-chilipeppr-interface-cnccontroller/axes", this, this.onRecvPosition);
+                    chilipeppr.subscribe("/ca-selfsyled-interface-cnccontroller/axes", this, this.onRecvPosition);
                 },
                 uninit: function() {
                     macro.status("Uninitted my macro");
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-serialport/ws/recv", this.onRecvData);
-                    chilipeppr.unsubscribe("/com-chilipeppr-interface-cnccontroller/axes", this.onRecvPosition);
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-serialport/ws/recv", this.onRecvData);
+                    chilipeppr.unsubscribe("/ca-selfsyled-interface-cnccontroller/axes", this.onRecvPosition);
                 },
                 msg: "", // stores data received
                 onRecvData: function(data) {
@@ -1369,7 +1369,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     if (pos.x == 0 && pos.x == 0) {
                         macro.status("Got 0,0 position so turn laser off");
                         // Send command to Arduino, i.e. to tell it to turn laser off
-                        chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "send " + this.portArduino + " laser-off\n");
+                        chilipeppr.publish("/ca-selfsyled-widget-serialport/ws/send", "send " + this.portArduino + " laser-off\n");
                         macro.status("Laser Off");
                         mymacro.uninit();
                     }
@@ -1379,13 +1379,13 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     // Send command to Arduino, i.e. to tell it to turn laser on
                     // Notice you must specify a port in this "/ws/send" since this
                     // serial port is not the default
-                    chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "send " + this.portArduino + " laser-on\n");
+                    chilipeppr.publish("/ca-selfsyled-widget-serialport/ws/send", "send " + this.portArduino + " laser-on\n");
                     macro.status("Laser On");
                     
                     // Send command to CNC
-                    chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G0 X0 Y0\n");
-                    chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G0 X1 Y1\n");
-                    chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G0 X0 Y0\n");
+                    chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G0 X0 Y0\n");
+                    chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G0 X1 Y1\n");
+                    chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G0 X0 Y0\n");
                     
                 }
             }
@@ -1396,8 +1396,8 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         },
         cmdsSentViaTimeout: function() {
             // Loop the CNC machine
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G90\n"); // abs mode
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G0 X0 Y0\n"); // 0,0
+            chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G90\n"); // abs mode
+            chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G0 X0 Y0\n"); // 0,0
             var timeout = 1000;
             var cmds = [];
             var ctr = 0;
@@ -1406,7 +1406,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     cmds.push("G1 X" + x + " Y" + y + " F100\n");
                     setTimeout(function() {
                         var cmd = cmds[ctr];
-                        chilipeppr.publish("/com-chilipeppr-widget-serialport/send", cmd);
+                        chilipeppr.publish("/ca-selfsyled-widget-serialport/send", cmd);
                         macro.status("Sent " + cmd);
                         ctr++;
                     }, timeout);
@@ -1416,19 +1416,19 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         },
         addbbox: function() {
             var add = function() {
-                chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", function(obj) {
+                chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", function(obj) {
                     console.log("3d obj:", obj);
                     window["bbox"] = new THREE.BoundingBoxHelper(obj, 0xff0000)
                     window["bbox"].update();
                     // Create visible bounding box
-                    chilipeppr.publish("/com-chilipeppr-widget-3dviewer/sceneadd", window["bbox"]);
+                    chilipeppr.publish("/ca-selfsyled-widget-3dviewer/sceneadd", window["bbox"]);
                     macro.status("added bounding box");
                 });
-                chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
+                chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
             };
             var remove = function() {
                 console.log(window["bbox"]);
-                chilipeppr.publish("/com-chilipeppr-widget-3dviewer/sceneremove", window["bbox"]);
+                chilipeppr.publish("/ca-selfsyled-widget-3dviewer/sceneremove", window["bbox"]);
                 macro.status("removed bounding box");
             };
             // don't run add twice or it will rewrite a new bbox and you'll
@@ -1437,13 +1437,13 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             //remove();
         },
         fadeout: function() {
-            chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", function(threed) {
+            chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", function(threed) {
                 console.log("3d obj:", threed);
                 threed.children[0].material.opacity = 0.99;
-                chilipeppr.publish("/com-chilipeppr-widget-3dviewer/wakeanimate");
+                chilipeppr.publish("/ca-selfsyled-widget-3dviewer/wakeanimate");
                 macro.status("Faded out 3d object");
             });
-            chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
+            chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
 
         },
         sendGcodeToWorkspace: function() {
@@ -1453,12 +1453,12 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 lastModified: new Date()
             };
             // send event off as if the file was drag/dropped
-            chilipeppr.publish("/com-chilipeppr-elem-dragdrop/ondropped", gcodetxt, info);
+            chilipeppr.publish("/ca-selfsyled-elem-dragdrop/ondropped", gcodetxt, info);
         },
         runTestProbe: function() {
             macro.status("Runing test probe.");
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G21 G90 (Use mm and abs coords)\n");
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G38.2 Z-10 F5\n");
+            chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G21 G90 (Use mm and abs coords)\n");
+            chilipeppr.publish("/ca-selfsyled-widget-serialport/send", "G38.2 Z-10 F5\n");
         },
         watch: function() {
             // Send a Gcode command and then 
@@ -1479,7 +1479,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     zpos = parseFloat(zpos);
                     if (zpos == 3) {
                         // we hit the Z location we wanted.
-                        chilipeppr.unsubscribe("/com-chilipeppr-widget-serialport/recvline", that, callback);
+                        chilipeppr.unsubscribe("/ca-selfsyled-widget-serialport/recvline", that, callback);
                         
                         alert("got to location we wanted");
                         macro.status("got to z loc of 3.00");
@@ -1491,7 +1491,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             // now subscribe and then usubscribe 
             // so we don't get all responses
             // after the data we want.
-            chilipeppr.subscribe("/com-chilipeppr-widget-serialport/recvline", this, callback);
+            chilipeppr.subscribe("/ca-selfsyled-widget-serialport/recvline", this, callback);
             
             // Send Gcode.
             macro.sendSerial("G0 Z4\n");
@@ -1501,14 +1501,14 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
         },
         sendSerial: function(gcode) {
             // send our data
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/send", gcode);
+            chilipeppr.publish("/ca-selfsyled-widget-serialport/send", gcode);
         },
         // END SAMPLES
         
         statEl: null, // cache the status element in DOM
         status: function(txt) {
             console.log("status. txt:", txt);
-            if (this.statEl == null) this.statEl = $('#com-chilipeppr-widget-macro-status');
+            if (this.statEl == null) this.statEl = $('#ca-selfsyled-widget-macro-status');
             var len = this.statEl.val().length;
             if (len > 3000) {
                 console.log("truncating status area text");
@@ -1546,7 +1546,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                     console.log("settings for z looked good. storing. zsettings:", that.zsettings);
                     
                     // unsub
-                    chilipeppr.unsubscribe("/com-chilipeppr-widget-serialport/recvline", that, callback);
+                    chilipeppr.unsubscribe("/ca-selfsyled-widget-serialport/recvline", that, callback);
                     
                     if (donecallback) donecallback.call(that);
                 }
@@ -1554,9 +1554,9 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             
             // now subscribe and then usubscribe so we don't get all responses
             // after the data we want.
-            chilipeppr.subscribe("/com-chilipeppr-widget-serialport/recvline", this, callback);
+            chilipeppr.subscribe("/ca-selfsyled-widget-serialport/recvline", this, callback);
             // send our data
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/send", send);
+            chilipeppr.publish("/ca-selfsyled-widget-serialport/send", send);
         },
         threeDGetUserObject: function() {
              // query the 3d viewer for it's core object
@@ -1565,9 +1565,9 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
                 obj3d = data;
             };
             
-            chilipeppr.subscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", this, recv3dObject);
-            chilipeppr.publish("/com-chilipeppr-widget-3dviewer/request3dObject", "");
-            chilipeppr.unsubscribe("/com-chilipeppr-widget-3dviewer/recv3dObject", this, recv3dObject);
+            chilipeppr.subscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", this, recv3dObject);
+            chilipeppr.publish("/ca-selfsyled-widget-3dviewer/request3dObject", "");
+            chilipeppr.unsubscribe("/ca-selfsyled-widget-3dviewer/recv3dObject", this, recv3dObject);
             
         },
         threeDMakeText: function(vals) {
@@ -1612,7 +1612,7 @@ cpdefine("inline:com-chilipeppr-widget-macro", ["chilipeppr_ready", /* other dep
             
             var that = this;
             chilipeppr.load("http://fiddle.jshell.net/chilipeppr/zMbL9/show/light/", function () {
-                require(['inline:com-chilipeppr-elem-pubsubviewer'], function (pubsubviewer) {
+                require(['inline:ca-selfsyled-elem-pubsubviewer'], function (pubsubviewer) {
                     pubsubviewer.attachTo($(topCssSelector + ' .panel-heading .dropdown .dropdown-menu-main'), that);
                 });
             });
