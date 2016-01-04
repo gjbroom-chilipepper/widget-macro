@@ -81,7 +81,7 @@ cpdefine("inline:ca-selfstyled-widget-macro", ["chilipeppr_ready", /* other depe
         foreignSubscribe: {
             // Define a key:value pair here as strings to document what signals you subscribe to
             // that are owned by foreign/other widgets.
-            // '/ca-selfsyled-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
+            // '/com-chilipeppr-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
         },
         jscript: null, // contains the javascript macro that the user is working with
         init: function () {
@@ -1288,8 +1288,8 @@ cpdefine("inline:ca-selfstyled-widget-macro", ["chilipeppr_ready", /* other depe
             // them in a new right column
             var cams = {
                 init: function() {
-                    $('#ca-selfsyled-ws-gcode-hdr').parent().addClass('nopadding');
-                    $('#ca-selfsyled-webrtcclient').remove();
+                    $('#com-chilipeppr-ws-gcode-hdr').parent().addClass('nopadding');
+                    $('#com-chilipeppr-webrtcclient').remove();
                     $('.pnlWorkspaceRtSidebarCollapsed').removeClass('col-xs-12').addClass('col-xs-10');
                     $('#pnlRtSidebar').addClass('col-xs-2 nopadding').css('padding-right', '10px');
                     // $('#pnlRtSidebar').html("");
@@ -1299,7 +1299,7 @@ cpdefine("inline:ca-selfstyled-widget-macro", ["chilipeppr_ready", /* other depe
                 },
                 initCams: function() {
                     macro.status("initting cams");
-                    cprequire(["inline:ca-selfsyled-widget-webrtc-clientmulti"], function (camlist) {
+                    cprequire(["inline:com-chilipeppr-widget-webrtc-clientmulti"], function (camlist) {
                         console.log("running of " + camlist.id);
                         camlist.init();
                     });
@@ -1316,7 +1316,7 @@ cpdefine("inline:ca-selfstyled-widget-macro", ["chilipeppr_ready", /* other depe
             // override methods in a module, call 
             // methods directly, or access properties 
             // of that module.
-            cprequire(['inline:ca-selfsyled-widget-gcode'], function(gcode) {
+            cprequire(['inline:com-chilipeppr-widget-gcode'], function(gcode) {
                 var txt = gcode.fileLines.join('\n');
                 window.open('data:text/csv;charset=utf-8,' + escape(txt));
             });
